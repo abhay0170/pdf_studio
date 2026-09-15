@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors.dart';
 
-/// The "More powerful tools" upsell strip at the bottom of the Tools tab.
+/// The "More powerful tools" upsell strip pinned above the tool grid — it
+/// stays fixed while the grid scrolls underneath it.
 class ProBanner extends StatelessWidget {
   const ProBanner({super.key, this.onTap});
 
@@ -26,6 +27,13 @@ class ProBanner extends StatelessWidget {
               color: colors.photosBadgeBackground,
               borderRadius: BorderRadius.circular(18),
               border: Border.all(color: colors.titleAccent.withValues(alpha: 0.25)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.18),
+                  blurRadius: 20,
+                  offset: const Offset(0, 8),
+                ),
+              ],
             ),
             child: Row(
               children: [

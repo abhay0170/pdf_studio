@@ -12,6 +12,12 @@ class ProfileMenuEntry {
 
 const List<ProfileMenuEntry> kProfileMenuEntries = [
   ProfileMenuEntry(
+    icon: Icons.settings_rounded,
+    title: 'Settings',
+    subtitle: 'App preferences and configuration',
+    color: Color(0xFF64748B),
+  ),
+  ProfileMenuEntry(
     icon: Icons.person_rounded,
     title: 'Account Information',
     subtitle: 'Manage your personal details',

@@ -22,7 +22,15 @@ class HomeScreen extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const HomeTopBar(),
+          HomeTopBar(
+            onPremiumTap: () {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(content: Text('Premium coming soon'), behavior: SnackBarBehavior.floating),
+                );
+            },
+          ),
           const SizedBox(height: 24),
           Row(
             children: [
@@ -116,20 +124,23 @@ class _EmptyRecentDocuments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(Icons.description_outlined, color: colors.docMeta, size: 28),
-          const SizedBox(height: 10),
-          Text(
-            'Your recent documents will show up here',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 13.5, color: colors.docMeta),
-          ),
-        ],
+    return SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.description_outlined, color: colors.docMeta, size: 28),
+            const SizedBox(height: 10),
+            Text(
+              'Your recent documents will show up here',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 13.5, color: colors.docMeta),
+            ),
+          ],
+        ),
       ),
     );
   }

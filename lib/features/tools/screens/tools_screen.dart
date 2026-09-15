@@ -37,48 +37,60 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
     final tools = ref.watch(filteredToolsProvider);
     final category = ref.watch(toolCategoryFilterProvider);
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ToolsHeader(onPremiumTap: () => _showComingSoon('Premium coming soon')),
-          const SizedBox(height: 18),
-          ToolSearchBar(
-            controller: _searchController,
-            onChanged: (value) => ref.read(toolSearchQueryProvider.notifier).update(value),
-          ),
-          const SizedBox(height: 14),
-          ToolCategoryChips(
-            selected: category,
-            onSelected: (value) => ref.read(toolCategoryFilterProvider.notifier).select(value),
-          ),
-          const SizedBox(height: 18),
-          if (tools.isEmpty)
-            const _EmptyTools()
-          else
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: tools.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                childAspectRatio: 1.05,
+    return Stack(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 20, 24, 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ToolsHeader(onPremiumTap: () => _showComingSoon('Premium coming soon')),
+                  const SizedBox(height: 18),
+                  ToolSearchBar(
+                    controller: _searchController,
+                    onChanged: (value) => ref.read(toolSearchQueryProvider.notifier).update(value),
+                  ),
+                  const SizedBox(height: 14),
+                  ToolCategoryChips(
+                    selected: category,
+                    onSelected: (value) => ref.read(toolCategoryFilterProvider.notifier).select(value),
+                  ),
+                ],
               ),
-              itemBuilder: (context, index) {
-                final tool = tools[index];
-                return ToolCard(
-                  tool: tool,
-                  onTap: () => _showComingSoon('${tool.title} coming soon'),
-                );
-              },
             ),
-          const SizedBox(height: 20),
-          ProBanner(onTap: () => _showComingSoon('Premium coming soon')),
-        ],
-      ),
+            Expanded(
+              child: tools.isEmpty
+                  ? const _EmptyTools()
+                  : GridView.builder(
+                      padding: const EdgeInsets.fromLTRB(24, 4, 24, 110),
+                      itemCount: tools.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 12,
+                        childAspectRatio: 0.92,
+                      ),
+                      itemBuilder: (context, index) {
+                        final tool = tools[index];
+                        return ToolCard(
+                          tool: tool,
+                          onTap: () => _showComingSoon('${tool.title} coming soon'),
+                        );
+                      },
+                    ),
+            ),
+          ],
+        ),
+        Positioned(
+          left: 24,
+          right: 24,
+          bottom: 16,
+          child: ProBanner(onTap: () => _showComingSoon('Premium coming soon')),
+        ),
+      ],
     );
   }
 }

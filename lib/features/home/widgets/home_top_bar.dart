@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors.dart';
 
-/// "PDF Studio" wordmark and the profile avatar at the top of Home.
+/// "PDF Studio" wordmark and the premium/crown button at the top of Home.
 class HomeTopBar extends StatelessWidget {
-  const HomeTopBar({super.key, this.onAvatarTap});
+  const HomeTopBar({super.key, this.onPremiumTap});
 
-  final VoidCallback? onAvatarTap;
+  final VoidCallback? onPremiumTap;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +23,21 @@ class HomeTopBar extends StatelessWidget {
             color: colors.titleAccent,
           ),
         ),
-        GestureDetector(
-          onTap: onAvatarTap,
-          child: CircleAvatar(
-            radius: 22,
-            backgroundColor: colors.chipDark,
-            child: const Icon(Icons.person_rounded, color: Colors.white, size: 20),
+        Semantics(
+          label: 'Premium',
+          button: true,
+          child: Material(
+            color: colors.chipDark,
+            shape: const CircleBorder(),
+            child: InkWell(
+              onTap: onPremiumTap,
+              customBorder: const CircleBorder(),
+              child: const SizedBox(
+                width: 44,
+                height: 44,
+                child: Icon(Icons.workspace_premium_rounded, color: Colors.white, size: 20),
+              ),
+            ),
           ),
         ),
       ],

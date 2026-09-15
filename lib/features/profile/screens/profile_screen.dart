@@ -25,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProfileHeader(onSettingsTap: () => _showComingSoon(context, 'Settings coming soon')),
+          const ProfileHeader(),
           const SizedBox(height: 18),
           ProfileCard(
             name: 'Abhay',
