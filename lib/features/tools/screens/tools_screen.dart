@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../app/routing/app_router.dart';
 import '../../../app/theme/app_colors.dart';
 import '../providers/tools_provider.dart';
 import '../widgets/pro_banner.dart';
@@ -77,7 +78,15 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
                         final tool = tools[index];
                         return ToolCard(
                           tool: tool,
-                          onTap: () => _showComingSoon('${tool.title} coming soon'),
+                          onTap: switch (tool.id) {
+                            'merge' => () => Navigator.of(context).pushNamed(AppRoutes.mergePdf),
+                            'split' => () => Navigator.of(context).pushNamed(AppRoutes.splitPdf),
+                            'compress' => () => Navigator.of(context).pushNamed(AppRoutes.compressPdf),
+                            'extract' => () => Navigator.of(context).pushNamed(AppRoutes.extractPdf),
+                            'rotate' => () => Navigator.of(context).pushNamed(AppRoutes.rotatePdf),
+                            'protect' => () => Navigator.of(context).pushNamed(AppRoutes.protectPdf),
+                            _ => () => _showComingSoon('${tool.title} coming soon'),
+                          },
                         );
                       },
                     ),

@@ -35,7 +35,7 @@ const List<ToolItem> kToolCatalog = [
   ToolItem(
     id: 'extract',
     title: 'Extract',
-    subtitle: 'Extract pages or images from a PDF.',
+    subtitle: 'Pull out pages, images or text from your PDF.',
     icon: Icons.file_download_rounded,
     color: Color(0xFF3B82F6),
     category: ToolCategory.organize,

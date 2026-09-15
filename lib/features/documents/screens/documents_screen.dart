@@ -6,6 +6,7 @@ import '../../../app/theme/app_colors.dart';
 import '../models/document_model.dart';
 import '../providers/documents_filter_provider.dart';
 import '../providers/documents_provider.dart';
+import '../utils/document_actions.dart';
 import '../widgets/document_card.dart';
 import '../widgets/document_category_chips.dart';
 import '../widgets/document_search_bar.dart';
@@ -223,7 +224,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
         Positioned(
           right: 24,
           bottom: 20,
-          child: ScanFabButton(onTap: () => _showComingSoon('Scanner coming soon')),
+          child: ScanFabButton(onTap: () => openScanner(context)),
         ),
       ],
     );

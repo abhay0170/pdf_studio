@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../documents/providers/documents_provider.dart';
+import '../../documents/utils/document_actions.dart';
 import '../widgets/home_top_bar.dart';
 import '../widgets/quick_action_card.dart';
 import '../widgets/quick_action_pill.dart';
@@ -40,6 +41,7 @@ class HomeScreen extends ConsumerWidget {
                   title: 'Scan',
                   subtitle: 'Create PDF',
                   highlighted: true,
+                  onTap: () => openScanner(context),
                 ),
               ),
               const SizedBox(width: 14),
